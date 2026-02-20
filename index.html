@@ -1,12 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-    <title>Menu</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>منيو السحور والمشروبات</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #f0f4f8;
+      min-height: 100vh;
+      padding: 20px 12px;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+      font-size: clamp(1.8rem, 6vw, 3.2rem);
+      margin: 20px 0 40px;
+      color: #e0f7fa;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .tab-btn {
+      padding: 14px 32px;
+      font-size: clamp(1.1rem, 4vw, 1.35rem);
+      font-weight: 600;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    
+    .tab-btn:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+    
+    .tab-btn.active {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      border-color: transparent;
+      box-shadow: 0 6px 20px rgba(0, 114, 255, 0.35);
+      transform: translateY(-3px);
+    }
+    
+    /* Tab content */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+    
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .menu-image {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .menu-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .tab-btn {
+        padding: 12px 24px;
+        font-size: 1.1rem;
+      }
+      h1 {
+        margin: 15px 0 30px;
+      }
+      .tabs {
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
-<body style="text-align:center;">
-    <h1>Menu</h1>
-    <img src="السحور.PNG" width="80%">
-    <br><br>
-    <img src="المشروبات.PNG" width="80%">
+<body>
+
+  <div class="container">
+    <h1>المنيو</h1>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="sahor">السحور</button>
+      <button class="tab-btn" data-tab="drinks">المشروبات</button>
+    </div>
+
+    <div id="sahor" class="tab-content active">
+      <div class="menu-image">
+        <img src="السحور.PNG" alt="منيو السحور">
+      </div>
+    </div>
+
+    <div id="drinks" class="tab-content">
+      <div class="menu-image">
+        <img src="المشروبات.PNG" alt="منيو المشروبات">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active from all
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        // Add active to clicked
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+
 </body>
 </html>
